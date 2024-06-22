@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check Bisnis Website</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom styles */
+      .custom-bg {
+        background-color: #2d3748; /* Adjust as needed */
+      }
+      .custom-input-text {
+        background-color: #2d3748; /* Adjust as needed */
+        color: #cbd5e0; /* Adjust as needed */
+      }
+      .title {
+        color: #ffffff; /* Adjust as needed */
+      }
+    </style>
+  </head>
+  <body>
+    <main class="h-screen w-full m-0 overflow-hidden">
+      <div class="w-auto h-full custom-bg m-0 overflow-hidden">
+        <div
+          class="w-auto h-screen flex justify-center items-center relative z-10 m-0 overflow-hidden"
+        >
+          <div
+            class="flex flex-col justify-center items-center absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-0 z-[-1] my-1"
+          ></div>
+          <div
+            class="w-full h-screen flex flex-col justify-center items-center"
+          >
+            <div
+              class="flex flex-col justify-center mb-4 px-5 py-2 rounded-lg bg-[#dcad6746] items-center text-xs sm:text-xs md:text-xs lg:text-xs xl:text-sm 2xl:text-lg"
+            ></div>
+            <div
+              id="formContainer"
+              class="flex-col text-white bg-[#9394ab3f] p-10 border border-gray-500 rounded-xl sm:w-screen md:w-screen lg:w-1/3 xl:w-1/3 2xl:w-1/3 mx-1"
+            >
+              <div
+                class="flex flex-col justify-center items-center backdrop-filter backdrop-blur-sm bg-opacity-20"
+              >
+                <h2
+                  class="text-xl sm:text-xl md:text-xl lg:text-xl xl:text-2xl 2xl:text-4xl font-bold title"
+                >
+                  Cek Ide Bisnis
+                </h2>
+                <div class="flex flex-col justify-center items-center">
+                  <div class="mt-5 flex flex-col justify-center items-center">
+                    <div
+                      class="text-center font-light text-xs sm:text-xs md:text-xs lg:text-xs xl:text-sm 2xl:text-lg"
+                    >
+                      Cek potensi yang ada di dalam diri kamu
+                    </div>
+                    <input
+                      id="inputnama"
+                      class="sm:text-xs md:text-xs lg:text-xs xl:text-sm 2xl:text-lg custom-input-text mt-2 p-2 rounded"
+                      placeholder="Tulis nama kamu di sini"
+                      required=""
+                    />
+                  </div>
+                  <button
+                    class="mt-5 bg-[#5F59D0] px-8 py-2 rounded-[200px] hover:bg-[#4e4aa7] sm:text-[16px] md:text-[16px] lg:text-[16px] xl:text-[16px] 2xl:text-[24px]"
+                    id="btn-check"
+                    type="button"
+                  >
+                    CHECK
+                  </button>
+                </div>
+                <div
+                  id="resultContainer"
+                  class="hidden flex flex-col mt-5 justify-center items-center"
+                >
+                  <div
+                    id="resultText"
+                    class="text-xs sm:text-xs md:text-xs lg:text-xs xl:text-sm 2xl:text-lg text-white text-center"
+                  ></div>
+                  <button
+                    id="btn-retry"
+                    class="mt-5 bg-[#ff7a7a] px-8 py-2 rounded-[200px] hover:bg-[#e65454] sm:text-[16px] md:text-[16px] lg:text-[16px] xl:text-[16px] 2xl:text-[24px]"
+                    type="button"
+                  >
+                    COBA LAGI
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const formContainer = document.getElementById("formContainer");
+      const resultContainer = document.getElementById("resultContainer");
+      const resultText = document.getElementById("resultText");
+      const inputNama = document.getElementById("inputnama");
+      const btnCheck = document.getElementById("btn-check");
+      const btnRetry = document.getElementById("btn-retry");
+      const options = ["jualan daging", "jualan cd", "jualan bakso"];
+
+      btnCheck.addEventListener("click", function () {
+        const input = inputNama.value.trim();
+        if (input !== "") {
+          // Tampilkan loading
+          resultText.textContent = "Loading...";
+          resultContainer.classList.remove("hidden");
+
+          // Timeout untuk menampilkan hasil setelah 2 detik
+          setTimeout(function () {
+            // Menghasilkan hasil
+            const randomIndex = Math.floor(Math.random() * options.length);
+            const hasilRandom = options[randomIndex];
+
+            resultText.textContent = `${hasilRandom}`;
+
+            // Tampilkan tombol "Coba Lagi"
+            btnRetry.classList.remove("hidden");
+          }, 2000); // Timeout 2 detik
+        }
+      });
+
+      btnRetry.addEventListener("click", function () {
+        resultContainer.classList.add("hidden");
+        formContainer.classList.remove("hidden");
+        inputNama.value = "";
+        btnRetry.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>
